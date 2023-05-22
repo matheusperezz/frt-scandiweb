@@ -1,6 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+
 import Divider from "./Divider";
+
+const Footer = () => {
+    return (
+        <StyledFooter>
+            <Divider />
+            <p>Scandiweb Test assignment</p>
+        </StyledFooter>
+    )
+}
 
 const StyledFooter = styled.div`
     position: absolute;
@@ -13,14 +23,5 @@ const StyledFooter = styled.div`
         margin: 16px 0;
     }
 `
-
-const Footer = () => {
-    return (
-        <StyledFooter>
-            <Divider />
-            <p>Scandiweb Test assignment</p>
-        </StyledFooter>
-    )
-}
 
 export default Footer;

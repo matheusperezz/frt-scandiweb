@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+
 import ProductListItem from "./ProductListItem";
 import Product from "../models/Product";
 
-const StyledProductList = styled.div`
-    display: grid;
-    grid-template-columns: repeat(6, minmax(200px, 1fr));
-    gap: 16px;
-`
 interface ProductListProps {
     productList: Product[];
     onSelectedItems: (items: string[]) => void;
@@ -34,7 +30,7 @@ const ProductList: React.FC<ProductListProps> = ({ productList, onSelectedItems 
     
     useEffect(() => {
         onSelectedItems(selectedItems);
-    }, [selectedItems, onSelectedItems])
+    }, [selectedItems, onSelectedItems]);
     
     return (
         <StyledProductList>
@@ -47,7 +43,13 @@ const ProductList: React.FC<ProductListProps> = ({ productList, onSelectedItems 
                 />
             ))}
         </StyledProductList>
-    )
-}
+    );
+};
+
+const StyledProductList = styled.div`
+    display: grid;
+    grid-template-columns: repeat(6, minmax(200px, 1fr));
+    gap: 16px;
+`
 
 export default ProductList;

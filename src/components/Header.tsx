@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 import Divider from "./Divider";
 
 type Props = {
@@ -9,6 +10,20 @@ type Props = {
     onLeftClick: () => void;
     onRightClick: () => void;
 }
+
+const Header: React.FC<Props> = ({headerTitle, leftButtonTitle, rightButtonTitle, onLeftClick, onRightClick }) => {
+    return (
+        <>
+            <StyledHeader>
+            <h2>{headerTitle}</h2>
+            <button id="leftbutton" onClick={onLeftClick}>{leftButtonTitle}</button>
+            <button id="delete-product-btn" onClick={onRightClick}>{rightButtonTitle}</button>
+            </StyledHeader>
+
+            <Divider />
+        </>
+    );
+};
 
 const StyledHeader = styled.header`
     
@@ -47,19 +62,5 @@ const StyledHeader = styled.header`
         opacity: 90%;
     }
 `
-
-const Header: React.FC<Props> = ({headerTitle, leftButtonTitle, rightButtonTitle, onLeftClick, onRightClick }) => {
-    return (
-        <>
-            <StyledHeader>
-            <h2>{headerTitle}</h2>
-            <button id="leftbutton" onClick={onLeftClick}>{leftButtonTitle}</button>
-            <button id="delete-product-btn" onClick={onRightClick}>{rightButtonTitle}</button>
-            </StyledHeader>
-
-            <Divider />
-        </>
-    );
-};
 
 export default Header;

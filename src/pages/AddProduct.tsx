@@ -11,13 +11,13 @@ import Product from "../models/Product";
 const AddProduct = () => {
   const [sku, setSku] = useState("");
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('');
   const [type, setType] = useState("");
-  const [weight, setWeight] = useState(0);
-  const [size, setSize] = useState(0);
-  const [height, setHeight] = useState(0);
-  const [width, setWidth] = useState(0);
-  const [length, setLength] = useState(0);
+  const [weight, setWeight] = useState('');
+  const [size, setSize] = useState('');
+  const [height, setHeight] = useState('');
+  const [width, setWidth] = useState('');
+  const [length, setLength] = useState('');
 
   const URL = "https://php-scandiweb.herokuapp.com/";
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const AddProduct = () => {
   };
 
   const onSaveProduct = async () => {
-    if (!sku || !name || price === 0 || !type) {
+    if (!sku || !name || price === '' || !type) {
       return;
     }
 
@@ -67,11 +67,11 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-    setWeight(0);
-    setSize(0);
-    setHeight(0);
-    setWidth(0);
-    setLength(0);
+    setWeight('');
+    setSize('');
+    setHeight('');
+    setWidth('');
+    setLength('');
   }, [type]);
 
   return (
@@ -110,7 +110,7 @@ const AddProduct = () => {
               id="price"
               type="number"
               value={price}
-              onChange={(event) => setPrice(Number(event.target.value))}
+              onChange={(event) => setPrice(event.target.value !== '' ? event.target.value : '')}
             />
           </FormGroup>
           <br />
@@ -136,7 +136,7 @@ const AddProduct = () => {
                   id="weight"
                   type="number"
                   value={weight}
-                  onChange={(event) => setWeight(Number(event.target.value))}
+                  onChange={(event) => setWeight(event.target.value !== '' ? event.target.value : '')}
                 />
               </FormGroup>
               <p>Please, provide weight</p>
@@ -150,7 +150,7 @@ const AddProduct = () => {
                   id="size"
                   type="number"
                   value={size}
-                  onChange={(event) => setSize(Number(event.target.value))}
+                  onChange={(event) => setSize(event.target.value !== '' ? event.target.value : '')}
                 />
               </FormGroup>
               <p>Please, provide size</p>
@@ -164,7 +164,7 @@ const AddProduct = () => {
                   id="height"
                   type="number"
                   value={height}
-                  onChange={(event) => setHeight(Number(event.target.value))}
+                  onChange={(event) => setHeight(event.target.value !== '' ? event.target.value : '')}
                 />
               </FormGroup>
               <FormGroup>
@@ -173,7 +173,7 @@ const AddProduct = () => {
                   id="width"
                   type="number"
                   value={width}
-                  onChange={(event) => setWidth(Number(event.target.value))}
+                  onChange={(event) => setWidth(event.target.value !== '' ? event.target.value : '')}
                 />
               </FormGroup>
               <FormGroup>
@@ -182,7 +182,7 @@ const AddProduct = () => {
                   id="length"
                   type="number"
                   value={length}
-                  onChange={(event) => setLength(Number(event.target.value))}
+                  onChange={(event) => setLength(event.target.value !== '' ? event.target.value : '')}
                 />
               </FormGroup>
               <p>Please, provide dimensions</p>

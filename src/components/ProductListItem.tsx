@@ -1,81 +1,89 @@
-import Product from "../models/Product";
 import React from "react";
 import styled from "styled-components";
-
-const StyledProductListItem = styled.div`
-    width: 200px;
-    background-color: #f0f0f0;
-    padding: 16px;
-    position: relative;
-    border-radius: 10px;
-    text-align: center;
-    height: 100px;
-
-    input {
-        position: absolute;
-        top: 8px;
-        left: 8px;
-    }
-`
+import Product from "../models/Product";
 
 interface ProductListItemProps {
-    item: Product;
-    isChecked: boolean;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>, sku: string) => void;
+  item: Product;
+  isChecked: boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>, sku: string) => void;
+}
+
+enum ProductType {
+  DVD = 'DVD',
+  Book = 'Book',
+  Furniture = 'Furniture',
 }
 
 const ProductListItem: React.FC<ProductListItemProps> = ({
-    item, 
-    isChecked, 
-    onChange
+  item,
+  isChecked,
+  onChange,
 }) => {
+  const { size, weight, height, width, length, SKU, name, price } = item;
 
-    let productType = '';
-
-    if (item.size){
-        productType = 'DVD';
-    } else if (item.weight){
-        productType = 'Book'
-    } else if (item.height && item.width && item.length){
-        productType = 'Furniture'
+  const determineProductType = (): ProductType => {
+    if (size) {
+      return ProductType.DVD;
+    } else if (weight) {
+      return ProductType.Book;
+    } else if (height && width && length) {
+      return ProductType.Furniture;
+    } else {
+        return ProductType.Furniture;
     }
+  };
 
-    let productText = '';
+  const getProductText = (): string => {
+    const type = determineProductType();
 
-    switch (productType){
-        case 'DVD':
-            productText = `Size: ${item.size} MB`;
-            break;
-        case 'Book':
-            productText = `Weight: ${item.weight}KG`;
-            break;
-        case 'Furniture':
-            productText = `Dimensions: ${item.height}x${item.width}x${item.length}`
-            break;
-        default:
-            productText = 'Product not registred'
-            break;
+    switch (type) {
+      case ProductType.DVD:
+        return `Size: ${size} MB`;
+      case ProductType.Book:
+        return `Weight: ${weight} KG`;
+      case ProductType.Furniture:
+        return `Dimensions: ${height}x${width}x${length}`;
+      default:
+        return 'Product not registered';
     }
+  };
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        onChange(event, item.SKU);
-    }
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event, SKU);
+  };
 
-    return (
-        <StyledProductListItem key={item.SKU}>
-            <input 
-                className="delete-checkbox" 
-                type="checkbox" 
-                checked={isChecked}
-                onChange={handleChange}
-            />
-            <p>{item.SKU}</p>
-            <p>{item.name}</p>
-            <p>{item.price} $</p>
-            <p>{productText}</p>
-        </StyledProductListItem>
-    )
+  const productText = getProductText();
 
-}
+  return (
+    <ProductListItemContainer>
+      <StyledInput
+        className="delete-checkbox"
+        type="checkbox"
+        checked={isChecked}
+        onChange={handleChange}
+      />
+      <p>{SKU}</p>
+      <p>{name}</p>
+      <p>{price} $</p>
+      <p>{productText}</p>
+    </ProductListItemContainer>
+  );
+};
+
+const ProductListItemContainer = styled.div`
+  width: 200px;
+  background-color: #f0f0f0;
+  padding: 16px;
+  position: relative;
+  border-radius: 10px;
+  text-align: center;
+  height: 100px;
+`;
+
+const StyledInput = styled.input`
+  position: absolute;
+  top: 8px;
+  left: 8px;
+`;
 
 export default ProductListItem;
