@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import axios from "axios";
 
@@ -19,6 +20,7 @@ const AddProduct = () => {
   const [length, setLength] = useState(0);
 
   const URL = "https://php-scandiweb.herokuapp.com/";
+  const navigate = useNavigate();
 
   const handleTypeChange = (event: any) => {
     setType(event.target.value);
@@ -51,8 +53,7 @@ const AddProduct = () => {
     
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
-        // Need to back
+        navigate('/')
       } else {
         console.error('Erro na requisição:', response.status);
       }
@@ -62,7 +63,7 @@ const AddProduct = () => {
   };
 
   const onCancelForm = () => {
-    // Need to back
+    navigate('/')
   };
 
   useEffect(() => {

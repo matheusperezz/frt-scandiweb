@@ -4,6 +4,7 @@ import ProductList from "../components/ProductList";
 import Footer from "../components/Footer";
 import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const URL = "https://php-scandiweb.herokuapp.com/";
 
@@ -30,15 +31,14 @@ export default function ListProducts(){
 
     const [productList, setProductList] = useState([]);
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
-
+    const navigate = useNavigate();
 
     const navigateToNewProduct = () => {
-        // Need to go to ADD PRODUCT
+        navigate('/addproduct')
     }
 
     const handleSelectedItems = (items: string[]) => {
         setSelectedItems(items);
-        console.log(items);
     }
 
     const deleteSelectedItems = async () => {
