@@ -57,8 +57,8 @@ export default function ListProducts(){
             <GlobalStyle />
             <Header
                 headerTitle="Product List"
-                leftButtonTitle="Add"
-                rightButtonTitle="Mass Delete"
+                leftButtonTitle="ADD"
+                rightButtonTitle="MASS DELETE"
 
                 onLeftClick={navigateToNewProduct}
                 onRightClick={deleteSelectedItems}
